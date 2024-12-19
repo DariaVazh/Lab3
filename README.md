@@ -107,7 +107,7 @@ class Task {
         return status;
     }
 
-    public void setStatus(boolean c){
+    public void setStatus(boolean c){//сеттер статуса выполнения задачи
         this.status = c;
     }
 
