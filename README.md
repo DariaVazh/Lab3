@@ -177,6 +177,7 @@ class ToDoList{
                 k++;
             }
         }
+        System.out.println();
     }
 
     public void completedTasks(){ //вывод списка завершенных задач
@@ -188,6 +189,7 @@ class ToDoList{
                 k++;
             }
         }
+        System.out.println();
     }
 
     public void changeStatus(int n){ // изменение статуса по номеру
@@ -247,7 +249,7 @@ class ToDoList{
     }
 
     public String percentage(){
-        return "Процент выполнения задач: " + Math.round((double)numberOfCompletedTasks()/count());
+        return "Процент выполнения задач: " + Math.round((double)numberOfCompletedTasks()/count()) + "%";
 
     }
 
@@ -256,10 +258,227 @@ class ToDoList{
         System.out.println();
         System.out.printf("Количество невыполненных задач: " + numberOfActiveTasks());
         System.out.println();
-        System.out.printf("Процент выполнения поставленных задач: "+"%.2f",percentage());
+        System.out.print(percentage());
     }
 
 }
  ```
 
 **6.Анализ правильности решения**
+1. Проверка создания пустого списка дел
+* Input
+```
+ToDoList taskList = new ToDoList();
+taskList.setName("План на выходные");
+        
+taskList.list();
+```
+* Output
+```
+План на выходные
+```
+2. Проверка правильности дабавления задач и их вывода
+* Input
+```
+ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        taskList.list();
+```
+* Output
+```
+План на выходные
+
+1. [ ] Сделать зарядку
+2. [ ] Сходить за продуктами
+3. [x] Сделать домашнее задание
+4. [ ] Посмотреть фильм
+```
+
+3. Проверка на правильность вывода списков выполеннных и невыполненных дел
+* Input
+``` ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        taskList.completedTasks();
+        taskList.activeTasks();
+    }
+```
+* Output
+```
+1. [x] Сделать домашнее задание
+
+1. [ ] Сделать зарядку
+2. [ ] Сходить за продуктами
+3. [ ] Посмотреть фильм
+```
+
+4. Проверка на правильность изменения стаутса дела по номеру и названию
+*Input
+```
+ ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        taskList.changeStatus(1);
+        taskList.changeStatus("Посмотреть фильм");
+
+        taskList.list();
+```
+*Output
+```
+План на выходные
+
+1. [x] Сделать зарядку
+2. [ ] Сходить за продуктами
+3. [x] Сделать домашнее задание
+4. [x] Посмотреть фильм
+```
+5. Проверка на получение номера дела по названию
+* Input
+```
+ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        System.out.println(taskList.numberOf("Посмотреть фильм"));
+```
+* Output
+```
+4
+```
+
+6. Проверка удаления дела по номеру и по названию
+* Input
+```
+ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        taskList.deleteTask(1);
+        taskList.deleteTask("Посмотреть фильм");
+
+        taskList.list();
+```
+* Output
+```
+План на выходные
+
+1. [ ] Сходить за продуктами
+2. [x] Сделать домашнее задание
+```
+7. Проверка на получение общего количества дел, количества выполненных дел, количества невыполненных дел
+* Input
+```
+ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        System.out.println(taskList.count());
+        System.out.println(taskList.numberOfCompletedTasks());
+        System.out.println(taskList.numberOfActiveTasks());
+```
+* Output
+```
+4
+1
+3
+```
+
+8. Проверка на вычисление процента выполненных задачи и общей статистики выполнения
+* Input
+```
+ToDoList taskList = new ToDoList();
+        taskList.setName("План на выходные");
+
+        Task t1 = new Task("Сделать зарядку", false);
+        Task t2 = new Task("Сходить за продуктами", false);
+        Task t3 = new Task("Сделать домашнее задание", true);
+        Task t4 = new Task("Сходить за продуктами", false);
+        Task t5 = new Task("Посмотреть фильм", false);
+
+        taskList.addTask(t1);
+        taskList.addTask(t2);
+        taskList.addTask(t3);
+        taskList.addTask(t4);
+        taskList.addTask(t5);
+
+        System.out.println(taskList.percentage());
+        taskList.statistics();
+```
+* Output
+```
+Процент выполнения задач: 25%
+Количество выполненных задач: 1
+Количество невыполненных задач: 3
+Процент выполнения задач: 25%
+Process finished with exit code 0
+```
